@@ -6,8 +6,9 @@ function bubbleSort(str) {
             sortLog.push([arr.concat(), [j, j + 1]])
             sortLog.push([arr.concat(), [j, j + 1]])
             sortLog.push([arr.concat(), [j, j + 1]])
-            if (arr[j] > arr[j + i]) {
-                [arr[j], arr[j = 1]] = [arr[j + 1], arr[j]]
+
+            if (arr[j-1] > arr[j]) {
+                [arr[j-1], arr[j]] = [arr[j], arr[j-1]]
                 sortLog.push([arr.concat(), [j, j + 1]])
             } 
         }
@@ -17,18 +18,15 @@ function bubbleSort(str) {
 }
 
 function showLog(logValues, showElement) {
-    let str = ','
-    let{
-        done,
-        value: [row, pos]
-    } = logValues.next()
+    let str = ''
+    let{done,value: [row, pos]} = logValues.next()
     for (const key in row){
         let color = pos.indexOf(Number(key)) > -1 ? 'solor:red' : ''
-        str += '<span stytle="font-size:' + row[key] * 20 + 'px:' +
+        str += '<span stytle="font-size:' + row[key] * 20 + 'px;' +
         color + '">' + row[key] + '</span>'
     }
     showElement.innerHTML = str
-    if (pos[0] != -1)
+    if (pos[0] !== -1)
      setTimeout("showLog(logValues,showDiv)", 500)
     }
     function insertSort(str){
